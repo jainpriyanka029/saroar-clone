@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+    meta charset="utf-8"
+    meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+    title= content_for?(:title) ? yield(:title) : 'OZ PROJECT MANAGEMENT'
+
+    /link href="https://npmcdn.com/social-likes-next/dist/social-likes_flat.css" rel="stylesheet"
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolink'
+
+  body
+    = render 'shared/header'
+    = render 'shared/main'
+    = render 'shared/footer'
+    script src="https://npmcdn.com/social-likes-next/dist/social-likes.min.js"

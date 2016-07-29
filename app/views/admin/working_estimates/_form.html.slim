@@ -1,0 +1,6 @@
+  
+= semantic_form_for [:admin, @working_estimate] do |f|
+  = f.inputs "Inputs stuff" do
+    = f.input :working_title
+    = f.input :default_sw_ids, :as => :check_boxes, collection: SubWorking.all.map { |i| [i.title, i.id.to_s] }
+    = f.actions

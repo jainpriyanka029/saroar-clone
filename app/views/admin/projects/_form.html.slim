@@ -1,0 +1,41 @@
+= semantic_form_for [:admin, @project] do |f|
+  = f.inputs "Project Details" do
+    = f.input :start_date, as: :date_picker
+    = f.input :doc_name
+    = f.input :project_name
+    = f.input :end_date, as: :date_picker
+    = f.input :company_id, as: :select, collection: Company.all.map {|c| [c.name, c.id]}
+    = f.input :active_project_working_estimate_ids, as: :check_boxes, collection: WorkingEstimate.all.reject{|t| t.draft==true}.map {|c| [c.working_title, c.id]}
+
+
+    /= f.inputs 'Working Estimates' do
+      / = f.semantic_fields_for :project_working_estimates do |we|
+      /= f.semantic_fields_for @project.project_working_estimates do |we|
+        br
+
+        /= we.input :working_title, collection: @project.active_project_working_estimates_titles.shift
+        /= we.input :project_working_estimate_subworking_ids, as: :check_boxes, collection: SubWorking.all.map { |s| [s.title, s.id] }
+
+        br
+        br
+      /   = we.inputs 'Sub Workings' do
+      /     = we.semantic_fields_for :project_working_estimate_subworkings do |sw|
+      /       br
+      /       = sw.input :title
+      /       = sw.input :working_hour
+      /       br
+      /       = sw.input :project_working_estimate_subworking_specialist_ids, as: :check_boxes, collection: Specialist.all.map { |s| [s.name, s.id] }
+      /       br
+      / 
+      /       = sw.inputs 'Specialist' do
+      /         br
+      /         = sw.semantic_fields_for :project_working_estimate_subworking_specialists do |s|
+      /           br
+      /           = s.input :name
+      /           = s.input :rate
+      /           br
+      /       br
+
+  = f.actions do
+    = f.action :submit
+    = f.action :cancel

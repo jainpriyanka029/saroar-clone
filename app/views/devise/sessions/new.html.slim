@@ -1,0 +1,16 @@
+.container
+  .col-md-8.col-md-offset-2
+    = bootstrap_devise_error_messages!
+    .panel.panel-success
+      .panel.panel-success.devise-bs
+        .panel-heading
+          h2 Log in
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .panel-body
+          .form-inputs
+            = f.input :email, required: false, autofocus: true
+            = f.input :password, required: false
+            = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+          .form-actions
+            = f.button :submit, "Log in"
+    = render "devise/shared/links"

@@ -1,0 +1,8 @@
+fieldset
+  legend
+    | Working Estimates
+  ol
+    li
+      = text_field_tag "project_working_estimates_#{@est.id}"
+    li
+      = collection_check_boxes "project_working_estimates_#{@est.id}", "project_working_estimate_subworkings", SubWorking.all, :id, :title
